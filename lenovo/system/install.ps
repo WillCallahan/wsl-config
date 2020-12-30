@@ -42,6 +42,7 @@ choco install -y docker-desktop
 choco install -y docker-compose
 
 choco install -y awscli
+choco install -y visualstudio2019buildtools
 
 choco install -y sublimetext3
 
@@ -53,3 +54,11 @@ choco install -y keybase
 choco install -y steam
 
 choco install -y wireguard
+
+# Application Installation Configuration
+npm config set registry 'https://nexus.i.callahanwilliam.com/repository/npm-proxy/'
+npm config set strict-ssl false
+
+pip config --user set global.index https://nexus.i.callahanwilliam.com/repository/pypi-proxy/pypi
+pip config --user set global.index-url https://nexus.i.callahanwilliam.com/repository/pypi-proxy/simple
+pip config --user set global.trusted-host nexus.i.callahanwilliam.com

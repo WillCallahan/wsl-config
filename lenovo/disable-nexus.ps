@@ -1,0 +1,12 @@
+Write-Host 'Disabling nexus configuration...' -ForegroundColor yellow
+
+# Npm Configuration
+npm config set registry https://registry.npmjs.org/
+npm set strict-ssl false
+
+# Python Pip Configuration
+pip config unset global.index
+pip config unset global.index-url
+pip config unset global.trusted-host
+
+Write-Host 'Nexus configuration disabled' -ForegroundColor yellow
