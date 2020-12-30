@@ -50,13 +50,14 @@
                 "guid": "{096d7b0d-5469-4c89-996e-1636d7c856c6}",
                 "name": "Git Bash",
                 "commandline": "%PROGRAMFILES%\\Git\\bin\\bash.exe",
+                "icon": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\git.ico",
                 "hidden": false
             },
             {
                 "guid": "{a03dd584-c338-48cc-b749-3f4b37e2648e}",
                 "hidden": false,
                 "name": "Ubuntu ZShell",
-                "icon": "C:\\Users\\William\\AppData\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\ubuntu.ico",
+                "icon": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\ubuntu.ico",
                 "colorScheme": "Argonaut",
                 "commandline": "wsl -d ubuntu-20.04 /bin/zsh"
             },
@@ -64,7 +65,7 @@
                 "guid": "{431d9f6e-c40b-4131-92c1-698a0ed34276}",
                 "hidden": false,
                 "name": "Beelink 0",
-                "icon": "C:\\Users\\William\\AppData\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\bee.png",
+                "icon": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\bee.png",
                 "colorScheme": "Argonaut",
                 "commandline": "wsl -d ubuntu-20.04 /bin/ssh -i /home/william/.ssh/server0/id_rsa william@ubuntu.0.i.callahanwilliam.com"
             },
@@ -72,7 +73,7 @@
                 "guid": "{e678ebc5-cecc-4b9e-8b0a-b6af06e16f76}",
                 "hidden": false,
                 "name": "Beelink 1",
-                "icon": "C:\\Users\\William\\AppData\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\bee.png",
+                "icon": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\bee.png",
                 "colorScheme": "Argonaut",
                 "commandline": "wsl -d ubuntu-20.04 /bin/ssh -i /home/william/.ssh/server1/id_rsa william@ubuntu.1.i.callahanwilliam.com"
             },
