@@ -1,0 +1,55 @@
+# WSL2 Installation
+# See https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+Write-Host 'Installing WSL 2 (Requires Restart to continue to step 2)' -ForegroundColor yellow
+
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+$kernelUpdateUrl="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
+Invoke-WebRequest -Uri $url -OutFile ~/Downloads/wsl_update_x64.msi
+
+# Choco Installation Packages
+Write-Host 'Installing Choco' -ForegroundColor yellow
+
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+choco upgrade chocolatey
+
+# SDKs
+choco install -y python3
+choco install -y dotnetcore-sdk
+choco install -y nodejs
+
+# Version Control
+choco install -y git
+
+# IDEs
+choco install -y jetbrainstoolbox
+choco install -y R.Studio
+choco install visualstudio2019community
+
+# VPN
+choco install -y viscosity
+
+# DBMS Clients
+choco install -y sql-server-management-studio
+choco install -y sqlsearch
+
+# Docker
+choco install -y docker
+choco install -y docker-desktop
+choco install -y docker-compose
+
+choco install -y awscli
+
+choco install -y sublimetext3
+
+choco install -y adobe-creative-cloud
+
+choco install -y slack
+choco install -y keybase
+
+choco install -y steam
+
+choco install -y wireguard
