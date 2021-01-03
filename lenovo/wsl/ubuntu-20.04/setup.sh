@@ -19,6 +19,10 @@ cat "${__dir}/microsoft.asc" | sudo apt-key add -
 echo 'deb [arch=amd64,armhf,arm64] https://nexus.i.callahanwilliam.com/repository/apt-proxy-microsoft focal main' | sudo tee /etc/apt/sources.list.d/msprod.list
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.zshrc
 
+echo "Installing Vim-Plug"
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
 cd ~
 mkdir git
 cd git
