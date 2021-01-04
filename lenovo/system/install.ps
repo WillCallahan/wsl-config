@@ -20,6 +20,9 @@ choco upgrade chocolatey
 choco install -y python3
 choco install -y dotnetcore-sdk
 choco install -y nodejs
+choco install -y openjdk
+choco install -y maven
+choco install -y lein
 
 # Version Control
 choco install -y git
@@ -56,6 +59,31 @@ choco install -y discord
 choco install -y steam
 
 choco install -y wireguard
+
+# Certificate Installation
+Write-Output "Installing nexus certificates"
+
+Write-Output '{
+  "sdk": {
+    "version": "3.1.0"
+  }
+}' | Out-File "${Home}/global.json"
+
+
+$webRequest = [Net.WebRequest]::Create("https://nexus.i.callahanwilliam.com/")
+try {
+    $webRequest.GetResponse()
+} catch {
+    Write-Error "Failed to get certificate from $webRequest"
+}
+$cert = $webRequest.ServicePoint.Certificate
+$bytes = $cert.Export([Security.Cryptography.X509Certificates.X509ContentType]::Cert)
+set-content -value $bytes -encoding byte -path "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer"
+
+Import-Certificate -FilePath "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer" -CertStoreLocation 'Cert:\LocalMachine\Root' -Verbose  -WhatIf
+
+Write-Output "Please enter the keytool password (default: changeit)..."
+keytool -import -alias nexus -keystore "${env:JAVA_HOME}\lib\security\cacerts" -file "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer"
 
 # Application Installation Configuration
 npm config set registry 'https://nexus.i.callahanwilliam.com/repository/npm-proxy/'

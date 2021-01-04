@@ -6,8 +6,13 @@ npm config set strict-ssl false
 # This is preferred:
 # npm config set cafile 'path to your certificate file'
 
+# Python Pip Configuration
 pip config --user set global.index https://nexus.i.callahanwilliam.com/repository/pypi-proxy/pypi
 pip config --user set global.index-url https://nexus.i.callahanwilliam.com/repository/pypi-proxy/simple
 pip config --user set global.trusted-host nexus.i.callahanwilliam.com
+
+# Dotnet Nuget Configuration
+dotnet nuget add source 'https://nexus.i.callahanwilliam.com/repository/nuget.org-proxy/index.json' -n nexus.i.callahanwilliam.com
+dotnet nuget disable source nuget.org
 
 Write-Host 'Nexus configuration enabled' -ForegroundColor yellow

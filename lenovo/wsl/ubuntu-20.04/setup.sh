@@ -23,6 +23,10 @@ echo "Installing Vim-Plug"
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
+echo "Installing Leiningen"
+wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && chmod a+x lein
+sudo mv lein /bin/lein
+
 cd ~
 mkdir git
 cd git

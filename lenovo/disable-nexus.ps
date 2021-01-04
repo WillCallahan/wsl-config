@@ -9,4 +9,8 @@ pip config unset global.index
 pip config unset global.index-url
 pip config unset global.trusted-host
 
+# Nuget Configuration
+dotnet nuget enable source nuget.org
+dotnet nuget remove source nexus.i.callahanwilliam.com
+
 Write-Host 'Nexus configuration disabled' -ForegroundColor yellow
