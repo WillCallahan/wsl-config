@@ -60,15 +60,10 @@ choco install -y steam
 
 choco install -y wireguard
 
+
+
 # Certificate Installation
 Write-Output "Installing nexus certificates"
-
-Write-Output '{
-  "sdk": {
-    "version": "3.1.0"
-  }
-}' | Out-File "${Home}/global.json"
-
 
 $webRequest = [Net.WebRequest]::Create("https://nexus.i.callahanwilliam.com/")
 try {
@@ -85,6 +80,8 @@ Import-Certificate -FilePath "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.call
 Write-Output "Please enter the keytool password (default: changeit)..."
 keytool -import -alias nexus -keystore "${env:JAVA_HOME}\lib\security\cacerts" -file "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer"
 
+
+
 # Application Installation Configuration
 npm config set registry 'https://nexus.i.callahanwilliam.com/repository/npm-proxy/'
 npm config set strict-ssl false
@@ -92,3 +89,37 @@ npm config set strict-ssl false
 pip config --user set global.index https://nexus.i.callahanwilliam.com/repository/pypi-proxy/pypi
 pip config --user set global.index-url https://nexus.i.callahanwilliam.com/repository/pypi-proxy/simple
 pip config --user set global.trusted-host nexus.i.callahanwilliam.com
+
+If(!(Test-Path "${Home}\.m2"))
+{
+      New-Item -ItemType Directory -Force -Path "${Home}\.m2"
+}
+
+Write-Output '<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+  <servers>
+    <server>
+      <id>nexus-snapshots</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+    <server>
+      <id>nexus-releases</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+  </servers>
+
+  <mirrors>
+    <mirror>
+      <id>central</id>
+      <name>central</name>
+      <url>https://nexus.i.callahanwilliam.com/repository/maven-public/</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+
+</settings>
+' | Out-File "${Home}\.m2\settings.xml"
