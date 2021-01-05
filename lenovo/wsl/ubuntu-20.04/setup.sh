@@ -8,7 +8,7 @@ sudo mv nexus.i.callahanwilliam.com.crt /usr/local/share/ca-certificates/
 sudo update-ca-certificates
 sudo rm -rf /var/lib/apt/lists/*
 sudo apt update
-sudo apt install -y zsh fzf ripgrep silversearcher-ag npm lftp ffmpeg python3 python3-venv openjdk-14-jdk neovim iperf awscli subversion jq lastpass-cli pandoc postgresql-client mysql-client
+sudo apt install -y zsh fzf ripgrep silversearcher-ag npm lftp ffmpeg python3 python3-venv openjdk-14-jdk neovim iperf awscli subversion jq lastpass-cli pandoc postgresql-client mysql-client libgtk-3-dev
 
 echo "Installing yq"
 wget https://github.com/mikefarah/yq/releases/download/v4.2.1/yq_linux_amd64 -O yq && chmod +x ~/yq
