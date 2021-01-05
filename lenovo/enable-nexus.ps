@@ -6,6 +6,9 @@ npm config set strict-ssl false
 # This is preferred:
 # npm config set cafile 'path to your certificate file'
 
+yarn config set registry 'https://nexus.i.callahanwilliam.com/repository/npm-proxy/'
+yarn config set strict-ssl false
+
 # Python Pip Configuration
 pip config --user set global.index https://nexus.i.callahanwilliam.com/repository/pypi-proxy/pypi
 pip config --user set global.index-url https://nexus.i.callahanwilliam.com/repository/pypi-proxy/simple

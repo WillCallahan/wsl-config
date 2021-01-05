@@ -4,6 +4,9 @@ Write-Host 'Disabling nexus configuration...' -ForegroundColor yellow
 npm config set registry https://registry.npmjs.org/
 npm set strict-ssl false
 
+yarn config delete registry
+yarn set strict-ssl false
+
 # Python Pip Configuration
 pip config unset global.index
 pip config unset global.index-url
