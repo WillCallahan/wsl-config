@@ -5,6 +5,7 @@ Write-Host 'Installing WSL 2 (Requires Restart to continue to step 2)' -Foregrou
 
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+dism.exe /online /enable-feature /featurename:Containers-DisposableClientVM /all /norestart
 
 $kernelUpdateUrl="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi"
 Invoke-WebRequest -Uri $url -OutFile ~/Downloads/wsl_update_x64.msi
@@ -24,6 +25,7 @@ choco install -y yarn
 choco install -y openjdk
 choco install -y maven
 choco install -y lein --version=2.9.1 --allow-downgrade
+choco install -y javaruntime
 
 # Version Control
 choco install -y git
@@ -62,6 +64,10 @@ choco install -y steam
 choco install -y wireguard
 
 
+# Launch4j Installation
+Invoke-WebRequest "https://managedway.dl.sourceforge.net/project/launch4j/launch4j-3/3.12/launch4j-3.12-win32.exe" -OutFile "${Home}\Downloads\Launch4j.exe"
+Start-Process -Wait -NoNewWindow -FilePath "${Home}\Downloads\Launch4j.exe"
+
 
 # Certificate Installation
 Write-Output "Installing nexus certificates"
@@ -76,7 +82,13 @@ $cert = $webRequest.ServicePoint.Certificate
 $bytes = $cert.Export([Security.Cryptography.X509Certificates.X509ContentType]::Cert)
 set-content -value $bytes -encoding byte -path "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer"
 
-Import-Certificate -FilePath "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer" -CertStoreLocation 'Cert:\LocalMachine\Root' -Verbose  -WhatIf
+# Trusted Certificates
+Import-Certificate -FilePath "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer" -CertStoreLocation 'Cert:\LocalMachine\Root' -Verbose 
+
+# Docker Certificates
+Write-Output "Creating docker crt files for nexus. NOTE: This may not work; you may need to get the cert files from the linux openssl command"
+New-Item -ItemType Directory -Force -Path "C:\ProgramData\docker\certs.d\nexus.i.callahanwilliam.com5000"
+Copy-Item -Force -Path "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer" "C:\ProgramData\docker\certs.d\nexus.i.callahanwilliam.com5000\ca.crt"
 
 Write-Output "Please enter the keytool password (default: changeit)..."
 keytool -import -alias nexus -keystore "${env:JAVA_HOME}\lib\security\cacerts" -file "${env:USERPROFILE}\AppData\Local\Temp\nexus.i.callahanwilliam.com.cer"
