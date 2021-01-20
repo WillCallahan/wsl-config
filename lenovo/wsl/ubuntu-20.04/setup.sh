@@ -33,8 +33,15 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 	       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 echo "Installing Leiningen"
+cd /tmp
 wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && chmod a+x lein
 sudo mv lein /bin/lein
+
+echo "Installing etcd"
+cd /tmp
+wget https://github.com/etcd-io/etcd/releases/download/v3.4.14/etcd-v3.4.14-linux-amd64.tar.gz
+tar -xf etcd-v3.4.14-linux-amd64.tar.gz
+sudo cp etcd-v3.4.14-linux-amd64/etcdctl /bin/
 
 cd ~
 mkdir git
